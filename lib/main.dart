@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:june_30/cart.dart';
+import 'package:june_30/home.dart';
+import 'package:june_30/profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LayoutTest(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -78,6 +82,95 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class LayoutTest extends StatefulWidget {
+  const LayoutTest({super.key});
+
+  @override
+  State<LayoutTest> createState() => _LayoutTestState();
+}
+
+class _LayoutTestState extends State<LayoutTest> {
+  int currentPage = 0;
+  List<Widget> screens = [const HomePage(), const CartPage(), const Profile()];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('My Appbar'),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.chat)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
+        ],
+      ),
+      backgroundColor: Colors.teal,
+      body: screens[currentPage],
+      drawer: Drawer(
+        child: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: 100,
+                      color: Colors.red,
+                    ),
+                  )
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 100,
+                    color: Colors.yellow,
+                  ),
+                  Container(
+                    width: 100,
+                    height: 100,
+                    color: Colors.green,
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: 100,
+                      color: Colors.blue,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentPage,
+          onTap: (value) {
+            setState(() {
+              currentPage = value;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag),
+              label: 'Cart',
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          ]),
     );
   }
 }
