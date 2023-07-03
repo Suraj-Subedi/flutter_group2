@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:june_30/cart.dart';
 import 'package:june_30/home.dart';
+import 'package:june_30/notification.dart';
 import 'package:june_30/profile.dart';
 
 void main() {
@@ -14,14 +15,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const LayoutTest(),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const LayoutTest(),
+        routes: {
+          '/notification': (context) => const NotificationPage(),
+        }
+        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        );
   }
 }
 
@@ -104,50 +108,50 @@ class _LayoutTestState extends State<LayoutTest> {
         title: const Text('My Appbar'),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.chat)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/notification');
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) => const NotificationPage(),
+                //   ),
+                // );
+              },
+              icon: const Icon(Icons.notifications))
         ],
       ),
       backgroundColor: Colors.teal,
       body: screens[currentPage],
       drawer: Drawer(
         child: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: 100,
-                      color: Colors.red,
-                    ),
-                  )
-                ],
+          child: Column(
+            children: const [
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('assets/profile.png'),
+                // backgroundImage: NetworkImage(
+                //   'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+                // ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.yellow,
-                  ),
-                  Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.green,
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: 100,
-                      color: Colors.blue,
-                    ),
-                  )
-                ],
+              // Container(
+              //   width: 150,
+              //   height: 150,
+              //   decoration: const BoxDecoration(
+              //     image: DecorationImage(
+              //       image: NetworkImage(
+              //           'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'),
+              //     ),
+              //     shape: BoxShape.circle,
+              //     color: Colors.red,
+              //     // borderRadius: BorderRadius.circular(1000000),
+              //   ),
+              // ),
+              Text(
+                'App User',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
               )
             ],
           ),
@@ -157,6 +161,7 @@ class _LayoutTestState extends State<LayoutTest> {
           currentIndex: currentPage,
           onTap: (value) {
             setState(() {
+              print(value);
               currentPage = value;
             });
           },
