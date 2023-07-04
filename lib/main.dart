@@ -15,17 +15,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const LayoutTest(),
-        routes: {
-          '/notification': (context) => const NotificationPage(),
-        }
-        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        );
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const LayoutTest(),
+      routes: {
+        '/notification': (context) => const NotificationPage(),
+      },
+      // routes: {
+      //   '/notification': (context) => const NotificationPage(),
+      // }
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
   }
 }
 
@@ -111,11 +114,14 @@ class _LayoutTestState extends State<LayoutTest> {
           IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/notification');
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => const NotificationPage(),
-                //   ),
-                // );
+                // // Navigator.of(context).push(
+                // //   MaterialPageRoute(
+                // //     builder: (context) => const NotificationPage(),
+                // //   ),
+                // // );
+
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) => const NotificationPage()));
               },
               icon: const Icon(Icons.notifications))
         ],
@@ -125,13 +131,19 @@ class _LayoutTestState extends State<LayoutTest> {
       drawer: Drawer(
         child: SafeArea(
           child: Column(
-            children: const [
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/profile.png'),
-                // backgroundImage: NetworkImage(
-                //   'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-                // ),
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              const Hero(
+                tag: 'profile',
+                child: CircleAvatar(
+                  radius: 80,
+                  // backgroundImage: AssetImage('assets/profile.png'),
+                  backgroundImage: NetworkImage(
+                    'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+                  ),
+                ),
               ),
               // Container(
               //   width: 150,
@@ -143,16 +155,58 @@ class _LayoutTestState extends State<LayoutTest> {
               //     ),
               //     shape: BoxShape.circle,
               //     color: Colors.red,
-              //     // borderRadius: BorderRadius.circular(1000000),
+              //     // borderRadius: BorderRadius.circular(10000),
               //   ),
               // ),
-              Text(
+              const Text(
                 'App User',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
-              )
+              ),
+
+              const SizedBox(
+                height: 60,
+              ),
+
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Profile'),
+                subtitle: const Text("Go to your profile"),
+                trailing: const Icon(Icons.arrow_forward_ios),
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const Profile()));
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Settings'),
+                subtitle: const Text("Go to your profile"),
+                trailing: const Icon(Icons.arrow_forward_ios),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Logout'),
+                subtitle: const Text("Go to your profile"),
+                trailing: const Icon(Icons.arrow_forward_ios),
+                onTap: () {},
+              ),
+
+              // CustomButton(
+              //   title: 'Login',
+              //   onPressed: () {},
+              // ),
+              // CustomButton(
+              //   onPressed: () {},
+              //   title: 'Register',
+              // ),
+              // CustomButton(
+              //   onPressed: () {},
+              //   title: 'Logout',
+              // )
             ],
           ),
         ),

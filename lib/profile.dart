@@ -5,6 +5,18 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('This is profile');
+    return const Scaffold(
+        body: Center(
+      child: Hero(
+        tag: 'profile',
+        child: CircleAvatar(
+          radius: 80,
+          // backgroundImage: AssetImage('assets/profile.png'),
+          backgroundImage: NetworkImage(
+            'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+          ),
+        ),
+      ),
+    ));
   }
 }
