@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:june_30/cart.dart';
 import 'package:june_30/home.dart';
 import 'package:june_30/notification.dart';
@@ -126,7 +127,7 @@ class _LayoutTestState extends State<LayoutTest> {
               icon: const Icon(Icons.notifications))
         ],
       ),
-      backgroundColor: Colors.teal,
+      backgroundColor: Colors.white,
       body: screens[currentPage],
       drawer: Drawer(
         child: SafeArea(
@@ -158,9 +159,11 @@ class _LayoutTestState extends State<LayoutTest> {
               //     // borderRadius: BorderRadius.circular(10000),
               //   ),
               // ),
-              const Text(
+              Text(
                 'App User',
                 style: TextStyle(
+                  fontFamily: GoogleFonts.permanentMarker().fontFamily,
+                  color: Colors.red,
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
