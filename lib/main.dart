@@ -45,48 +45,53 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SizedBox(
-          child: Wrap(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              for (int i = 0; i < 100; i++)
-                Row(
-                  children: [
-                    for (int j = 0; j < 5; j++)
-                      Expanded(
-                        child: AspectRatio(
-                          aspectRatio: 1,
-                          child: Container(
-                            color: j % 2 == 0
-                                ? i % 2 == 0
-                                    ? Colors.green
-                                    : Colors.red
-                                : i % 2 == 0
-                                    ? Colors.red
-                                    : Colors.green,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: SizedBox(
+            child: Wrap(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                for (int i = 0; i < 100; i++)
+                  Row(
+                    children: [
+                      for (int j = 0; j < 5; j++)
+                        Expanded(
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: Container(
+                              color: j % 2 == 0
+                                  ? i % 2 == 0
+                                      ? Colors.green
+                                      : Colors.red
+                                  : i % 2 == 0
+                                      ? Colors.red
+                                      : Colors.green,
+                            ),
                           ),
                         ),
-                      ),
-                  ],
-                ),
+                    ],
+                  ),
 
-              // Expanded(
-              //   flex: 1,
-              //   child: Container(
-              //     height: 200,
-              //     color: Colors.green,
-              //   ),
-              // ),
-              // Expanded(
-              //   child: Container(
-              //     height: 200,
-              //     color: Colors.blue,
-              //   ),
-              // ),
-            ],
+                // Expanded(
+                //   flex: 1,
+                //   child: Container(
+                //     height: 200,
+                //     color: Colors.green,
+                //   ),
+                // ),
+                // Expanded(
+                //   child: Container(
+                //     height: 200,
+                //     color: Colors.blue,
+                //   ),
+                // ),
+              ],
+            ),
           ),
         ),
       ),
@@ -106,133 +111,139 @@ class _LayoutTestState extends State<LayoutTest> {
   List<Widget> screens = [const HomePage(), const CartPage(), const Profile()];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('My Appbar'),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.chat)),
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/notification');
-                // // Navigator.of(context).push(
-                // //   MaterialPageRoute(
-                // //     builder: (context) => const NotificationPage(),
-                // //   ),
-                // // );
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('My Appbar'),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.chat)),
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/notification');
+                  // // Navigator.of(context).push(
+                  // //   MaterialPageRoute(
+                  // //     builder: (context) => const NotificationPage(),
+                  // //   ),
+                  // // );
 
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => const NotificationPage()));
-              },
-              icon: const Icon(Icons.notifications))
-        ],
-      ),
-      backgroundColor: Colors.white,
-      body: screens[currentPage],
-      drawer: Drawer(
-        child: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              const Hero(
-                tag: 'profile',
-                child: CircleAvatar(
-                  radius: 80,
-                  // backgroundImage: AssetImage('assets/profile.png'),
-                  backgroundImage: NetworkImage(
-                    'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) => const NotificationPage()));
+                },
+                icon: const Icon(Icons.notifications))
+          ],
+        ),
+        backgroundColor: Colors.white,
+        body: screens[currentPage],
+        drawer: Drawer(
+          child: SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                const Hero(
+                  tag: 'profile',
+                  child: CircleAvatar(
+                    radius: 80,
+                    // backgroundImage: AssetImage('assets/profile.png'),
+                    backgroundImage: NetworkImage(
+                      'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+                    ),
                   ),
                 ),
-              ),
-              // Container(
-              //   width: 150,
-              //   height: 150,
-              //   decoration: const BoxDecoration(
-              //     image: DecorationImage(
-              //       image: NetworkImage(
-              //           'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'),
-              //     ),
-              //     shape: BoxShape.circle,
-              //     color: Colors.red,
-              //     // borderRadius: BorderRadius.circular(10000),
-              //   ),
-              // ),
-              Text(
-                'App User',
-                style: TextStyle(
-                  fontFamily: GoogleFonts.permanentMarker().fontFamily,
-                  color: Colors.red,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
+                // Container(
+                //   width: 150,
+                //   height: 150,
+                //   decoration: const BoxDecoration(
+                //     image: DecorationImage(
+                //       image: NetworkImage(
+                //           'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'),
+                //     ),
+                //     shape: BoxShape.circle,
+                //     color: Colors.red,
+                //     // borderRadius: BorderRadius.circular(10000),
+                //   ),
+                // ),
+                Text(
+                  'App User',
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.permanentMarker().fontFamily,
+                    color: Colors.red,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
 
-              const SizedBox(
-                height: 60,
-              ),
+                const SizedBox(
+                  height: 60,
+                ),
 
-              ListTile(
-                leading: const Icon(Icons.person),
-                title: const Text('Profile'),
-                subtitle: const Text("Go to your profile"),
-                trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const Profile()));
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.person),
-                title: const Text('Settings'),
-                subtitle: const Text("Go to your profile"),
-                trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: const Icon(Icons.person),
-                title: const Text('Logout'),
-                subtitle: const Text("Go to your profile"),
-                trailing: const Icon(Icons.arrow_forward_ios),
-                onTap: () {},
-              ),
+                ListTile(
+                  leading: const Icon(Icons.person),
+                  title: const Text('Profile'),
+                  subtitle: const Text("Go to your profile"),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const Profile()));
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.person),
+                  title: const Text('Settings'),
+                  subtitle: const Text("Go to your profile"),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: const Icon(Icons.person),
+                  title: const Text('Logout'),
+                  subtitle: const Text("Go to your profile"),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  onTap: () {},
+                ),
 
-              // CustomButton(
-              //   title: 'Login',
-              //   onPressed: () {},
-              // ),
-              // CustomButton(
-              //   onPressed: () {},
-              //   title: 'Register',
-              // ),
-              // CustomButton(
-              //   onPressed: () {},
-              //   title: 'Logout',
-              // )
-            ],
+                // CustomButton(
+                //   title: 'Login',
+                //   onPressed: () {},
+                // ),
+                // CustomButton(
+                //   onPressed: () {},
+                //   title: 'Register',
+                // ),
+                // CustomButton(
+                //   onPressed: () {},
+                //   title: 'Logout',
+                // )
+              ],
+            ),
           ),
         ),
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentPage,
+            onTap: (value) {
+              setState(() {
+                print(value);
+                currentPage = value;
+              });
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_bag),
+                label: 'Cart',
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: 'Profile'),
+            ]),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: currentPage,
-          onTap: (value) {
-            setState(() {
-              print(value);
-              currentPage = value;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag),
-              label: 'Cart',
-            ),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          ]),
     );
   }
 }
