@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:june_30/cart.dart';
 import 'package:june_30/home.dart';
+import 'package:june_30/login.dart';
 import 'package:june_30/notification.dart';
 import 'package:june_30/profile.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LayoutTest(),
+      home: const LoginPage(),
       routes: {
         '/notification': (context) => const NotificationPage(),
       },
