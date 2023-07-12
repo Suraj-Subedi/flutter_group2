@@ -3,14 +3,14 @@
 $HOST = "localhost";
 $USER = "root";
 $PASS = "";
-$DB = "ecom2";
+$DB = "ecom";
 
 
 
 $CON = mysqli_connect($HOST, $USER, $PASS, $DB);
 
 if (!$CON) {
-    die("Connection Failed: " . mysqli_connect_error());
+    die("Connection Failed: ");
 } else {
     echo "Connected Successfully";
 }
