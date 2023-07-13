@@ -9,6 +9,8 @@ if (
 ) {
     global $CON;
     $email = $_POST['email'];
+    $fullname = $_POST['fullname'];
+    $password = $_POST['password'];
 
     $sql = "Select * from users where email ='$email'";
     $result = mysqli_query($CON, $sql);
@@ -22,6 +24,25 @@ if (
         );
         return;
     } else {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO users (full_name, email, password,role) VALUES ('$fullname', '$email', '$hashed_password','user')";
+        $result = mysqli_query($CON, $sql);
+
+        if ($result) {
+            echo json_encode(
+                array(
+                    "success" => true,
+                    "message" => "User registered successfully!"
+                )
+            );
+        } else {
+            echo json_encode(
+                array(
+                    "success" => false,
+                    "message" => "Something went wrong!"
+                )
+            );
+        }
     }
 } else {
     echo json_encode(
