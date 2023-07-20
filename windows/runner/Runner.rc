@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "june_28" "\0"
+            VALUE "CompanyName", "np.com.subedisuraj" "\0"
+            VALUE "FileDescription", "ecom_2" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "june_28" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "june_28.exe" "\0"
-            VALUE "ProductName", "june_28" "\0"
+            VALUE "InternalName", "ecom_2" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 np.com.subedisuraj. All rights reserved." "\0"
+            VALUE "OriginalFilename", "ecom_2.exe" "\0"
+            VALUE "ProductName", "ecom_2" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
