@@ -30,6 +30,7 @@ class LoginView extends GetView<LoginController> {
                   ),
                   const SizedBox(height: 50),
                   TextFormField(
+                    controller: controller.emailController,
                     decoration: const InputDecoration(
                       labelText: 'Email address',
                       hintText: 'Enter your email address',
@@ -44,6 +45,7 @@ class LoginView extends GetView<LoginController> {
                   ),
                   const SizedBox(height: 25),
                   TextFormField(
+                    controller: controller.passwordController,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Password',

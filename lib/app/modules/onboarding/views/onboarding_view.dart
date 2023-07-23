@@ -15,7 +15,11 @@ class OnboardingView extends GetView<OnboardingController> {
         body: PageView(
       controller: controller.pageController,
       physics: const NeverScrollableScrollPhysics(),
-      children: const [FirstView(), SecondView(), ThirdView()],
+      children: const [
+        FirstView(),
+        SecondView(),
+        ThirdView(),
+      ],
     ));
   }
 }
