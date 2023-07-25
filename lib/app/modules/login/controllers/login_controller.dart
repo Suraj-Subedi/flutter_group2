@@ -5,12 +5,20 @@ import 'package:ecom_2/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
+  late final SharedPreferences prefs;
   final count = 0.obs;
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+
+  @override
+  void onInit() async {
+    super.onInit();
+    prefs = await SharedPreferences.getInstance();
+  }
 
   void increment() {
     count.value++;
@@ -26,9 +34,12 @@ class LoginController extends GetxController {
           'password': passwordController.text,
         });
 
+        print(response.body);
+
         var result = jsonDecode(response.body);
 
         if (result['success']) {
+          await prefs.setString('token', result['token']);
           Get.toNamed(Routes.MAIN);
           Get.showSnackbar(GetSnackBar(
             backgroundColor: Colors.green,
@@ -43,6 +54,7 @@ class LoginController extends GetxController {
           ));
         }
       } catch (e) {
+        print(e.toString());
         Get.showSnackbar(const GetSnackBar(
           backgroundColor: Colors.red,
           message: 'Something went wrong',
