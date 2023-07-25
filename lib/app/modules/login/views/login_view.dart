@@ -39,6 +39,8 @@ class LoginView extends GetView<LoginController> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your email address';
+                      } else if (!GetUtils.isEmail(value)) {
+                        return 'Please enter a valid email address';
                       }
                       return null;
                     },

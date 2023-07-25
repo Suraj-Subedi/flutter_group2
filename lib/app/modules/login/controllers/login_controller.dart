@@ -20,6 +20,7 @@ class LoginController extends GetxController {
     if (loginFormKey.currentState!.validate()) {
       try {
         var url = Uri.http(ipAddress, 'ecom2_api/auth/login');
+        print(url);
         var response = await http.post(url, body: {
           'email': emailController.text,
           'password': passwordController.text,
