@@ -40,7 +40,7 @@ class LoginController extends GetxController {
 
         if (result['success']) {
           await prefs.setString('token', result['token']);
-          Get.toNamed(Routes.MAIN);
+          Get.offAllNamed(AppPages.HOME);
           Get.showSnackbar(GetSnackBar(
             backgroundColor: Colors.green,
             message: result['message'],
