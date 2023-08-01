@@ -25,7 +25,7 @@ if (
 
 
 
-    $sql = "Select * from categories where title ='$title'";
+    $sql = "Select * from categories where category_title ='$title'";
     $result = mysqli_query($CON, $sql);
     $num = mysqli_num_rows($result);
     if ($num > 0) {
@@ -37,7 +37,7 @@ if (
         );
         return;
     } else {
-        $sql = "INSERT INTO categories (title) VALUES ('$title')";
+        $sql = "INSERT INTO categories (category_title) VALUES ('$title')";
         $result = mysqli_query($CON, $sql);
 
         if ($result) {
