@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:ecom_2/app/constants.dart';
+import 'package:ecom_2/app/model/category.dart';
+
 import 'package:ecom_2/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,7 @@ import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
   late final SharedPreferences prefs;
+  List<Category>? categories;
   final count = 0.obs;
 
   @override
@@ -21,6 +24,7 @@ class HomeController extends GetxController {
   void getCategories() async {
     try {
       var url = Uri.http(ipAddress, 'ecom2_api/getCategory');
+      // await Future.delayed(const Duration(seconds: 3));
 
       var response = await http.get(
         url,
@@ -29,13 +33,13 @@ class HomeController extends GetxController {
       var result = jsonDecode(response.body);
 
       if (result['success']) {
-        Get.back();
         Get.showSnackbar(GetSnackBar(
           backgroundColor: Colors.green,
           message: result['message'],
           duration: const Duration(seconds: 3),
         ));
-        print(result['data']);
+        categories = categoryFromJson(jsonEncode(result['data']));
+        update();
       } else {
         Get.showSnackbar(GetSnackBar(
           backgroundColor: Colors.red,
