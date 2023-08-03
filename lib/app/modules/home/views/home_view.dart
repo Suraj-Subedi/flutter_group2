@@ -22,31 +22,55 @@ class HomeView extends GetView<HomeController> {
               );
             }
 
-            return Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: SizedBox(
-                height: 40,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.categories?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 5,
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 40,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: controller.categories?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: const EdgeInsets.only(right: 10),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(200)),
+                              child: Center(
+                                child: Text(
+                                  controller.categories?[index].categoryTitle ??
+                                      '',
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            );
+                          }),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 12,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.75,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
                         ),
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(200)),
-                        child: Center(
-                          child: Text(
-                            controller.categories?[index].categoryTitle ?? '',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      );
-                    }),
+                        itemBuilder: (context, index) =>
+                            const SizedBox(width: 200, child: Placeholder()))
+                  ],
+                ),
               ),
             );
           },
