@@ -1,5 +1,15 @@
 import 'package:get/get.dart';
 
+import '../modules/admin_categories/bindings/admin_categories_binding.dart';
+import '../modules/admin_categories/views/admin_categories_view.dart';
+import '../modules/admin_dashboard/bindings/admin_dashboard_binding.dart';
+import '../modules/admin_dashboard/views/admin_dashboard_view.dart';
+import '../modules/admin_main/bindings/admin_main_binding.dart';
+import '../modules/admin_main/views/admin_main_view.dart';
+import '../modules/admin_orders/bindings/admin_orders_binding.dart';
+import '../modules/admin_orders/views/admin_orders_view.dart';
+import '../modules/admin_products/bindings/admin_products_binding.dart';
+import '../modules/admin_products/views/admin_products_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -65,6 +75,31 @@ class AppPages {
       name: _Paths.ONBOARDING,
       page: () => const OnboardingView(),
       binding: OnboardingBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_MAIN,
+      page: () => const AdminMainView(),
+      binding: AdminMainBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_DASHBOARD,
+      page: () => const AdminDashboardView(),
+      binding: AdminDashboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_PRODUCTS,
+      page: () => const AdminProductsView(),
+      binding: AdminProductsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_CATEGORIES,
+      page: () => const AdminCategoriesView(),
+      binding: AdminCategoriesBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ORDERS,
+      page: () => const AdminOrdersView(),
+      binding: AdminOrdersBinding(),
     ),
   ];
 }

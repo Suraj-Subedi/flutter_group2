@@ -18,4 +18,20 @@ class MemoryManagement {
   static void removeAccessToken() {
     prefs!.remove('token');
   }
+
+  static String? getAccessRole() {
+    return prefs != null ? prefs!.getString('role') : null;
+  }
+
+  static void setAccessRole(String token) {
+    prefs!.setString('role', token);
+  }
+
+  static void removeAccessRole() {
+    prefs!.remove('role');
+  }
+
+  static void removeAll() {
+    prefs!.clear();
+  }
 }

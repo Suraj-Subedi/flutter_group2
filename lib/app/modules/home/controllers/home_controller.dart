@@ -36,11 +36,11 @@ class HomeController extends GetxController {
       var result = jsonDecode(response.body);
 
       if (result['success']) {
-        Get.showSnackbar(GetSnackBar(
-          backgroundColor: Colors.green,
-          message: result['message'],
-          duration: const Duration(seconds: 3),
-        ));
+        // Get.showSnackbar(GetSnackBar(
+        //   backgroundColor: Colors.green,
+        //   message: result['message'],
+        //   duration: const Duration(seconds: 3),
+        // ));
         categories = categoryFromJson(jsonEncode(result['data']));
         update();
       } else {
@@ -72,15 +72,16 @@ class HomeController extends GetxController {
       var result = jsonDecode(response.body);
 
       if (result['success']) {
-        Get.showSnackbar(GetSnackBar(
-          backgroundColor: Colors.green,
-          message: result['message'],
-          duration: const Duration(seconds: 3),
-        ));
+        // Get.showSnackbar(GetSnackBar(
+        //   backgroundColor: Colors.green,
+        //   message: result['message'],
+        //   duration: const Duration(seconds: 3),
+        // ));
 
         products = productFromJson(
           jsonEncode(result['data']),
         );
+        update();
       }
     } catch (e) {
       Get.showSnackbar(const GetSnackBar(

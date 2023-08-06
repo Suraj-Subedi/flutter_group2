@@ -2,23 +2,17 @@ import 'dart:convert';
 
 import 'package:ecom_2/app/constants.dart';
 import 'package:ecom_2/app/routes/app_pages.dart';
+import 'package:ecom_2/app/utils/memoryManagement.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
-  late final SharedPreferences prefs;
+  // late final SharedPreferences prefs;
   final count = 0.obs;
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-
-  @override
-  void onInit() async {
-    super.onInit();
-    prefs = await SharedPreferences.getInstance();
-  }
 
   void increment() {
     count.value++;
@@ -39,8 +33,16 @@ class LoginController extends GetxController {
         var result = jsonDecode(response.body);
 
         if (result['success']) {
-          await prefs.setString('token', result['token']);
-          Get.offAllNamed(AppPages.HOME);
+          MemoryManagement.setAccessRole(result['role']);
+          MemoryManagement.setAccessToken(result['token']);
+          // await prefs.setString('token', result['token']);
+          // await prefs.setString('role', result['role']);
+
+          if (result['role'] == 'admin') {
+            Get.offAllNamed(Routes.ADMIN_MAIN);
+          } else {
+            Get.offAllNamed(Routes.MAIN);
+          }
           Get.showSnackbar(GetSnackBar(
             backgroundColor: Colors.green,
             message: result['message'],

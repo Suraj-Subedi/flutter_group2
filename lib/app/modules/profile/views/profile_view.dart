@@ -1,3 +1,5 @@
+import 'package:ecom_2/app/routes/app_pages.dart';
+import 'package:ecom_2/app/utils/memoryManagement.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,11 +15,13 @@ class ProfileView extends GetView<ProfileController> {
         title: const Text('ProfileView'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'ProfileView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: Center(
+        child: ElevatedButton(
+            onPressed: () {
+              MemoryManagement.removeAll();
+              Get.offAllNamed(Routes.LOGIN);
+            },
+            child: const Text('Logout')),
       ),
     );
   }
