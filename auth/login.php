@@ -25,6 +25,7 @@ if (
         $row = mysqli_fetch_assoc($result);
         $hashed_password = $row['password'];
         $user_id = $row['user_id'];
+        $role = $row['role'];
         $result = password_verify($password, $hashed_password);
 
         if ($result) {
@@ -40,7 +41,8 @@ if (
                     array(
                         "success" => true,
                         "message" => "User logged in successfully!",
-                        "token" => $token
+                        "token" => $token,
+                        "role" => $role
                     )
                 );
             } else {

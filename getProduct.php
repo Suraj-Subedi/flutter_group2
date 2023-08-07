@@ -5,6 +5,7 @@ include './Helpers/Authenication.php';
 
 global $CON;
 
+// $sql = "Select * from products";
 $sql = "Select * from products join categories on categories.category_id=products.category_id";
 $result = mysqli_query($CON, $sql);
 
