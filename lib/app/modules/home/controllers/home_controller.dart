@@ -15,6 +15,7 @@ class HomeController extends GetxController {
   List<Category>? categories;
   List<Product>? products;
   final count = 0.obs;
+  String? selectedCategory;
 
   @override
   void onInit() async {

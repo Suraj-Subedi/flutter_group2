@@ -14,8 +14,6 @@ void main() async {
   // var role = prefs.getString('role');
   var token = MemoryManagement.getAccessToken();
   var role = MemoryManagement.getAccessRole();
-  print(token);
-  print(role);
 
   runApp(
     GetMaterialApp(
