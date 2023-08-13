@@ -1,3 +1,4 @@
+import 'package:ecom_2/app/components/product_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -56,19 +57,25 @@ class HomeView extends GetView<HomeController> {
                     const SizedBox(
                       height: 20,
                     ),
-                    GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 12,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 0.75,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                        ),
-                        itemBuilder: (context, index) =>
-                            const SizedBox(width: 200, child: Placeholder()))
+                    controller.products == null
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.products?.length ?? 0,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 0.75,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                            ),
+                            itemBuilder: (context, index) => SizedBox(
+                                width: 200,
+                                child: ProductCard(
+                                    product: controller.products![index])))
                   ],
                 ),
               ),
