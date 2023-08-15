@@ -24,12 +24,6 @@ class MainView extends GetView<MainController> {
             FloatingNavbarItem(icon: Icons.person, title: 'Profile'),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            controller.increment();
-          },
-          child: const Icon(Icons.add),
-        ),
       ),
     );
   }

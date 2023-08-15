@@ -27,11 +27,19 @@ class MemoryManagement {
     prefs!.setString('role', token);
   }
 
+  static String? getMyCart() {
+    return prefs != null ? prefs!.getString('cart') : null;
+  }
+
+  static void setMyCart(String cart) {
+    prefs!.setString('cart', cart);
+  }
+
   static void removeAccessRole() {
     prefs!.remove('role');
   }
 
-  static void removeAll() {
-    prefs!.clear();
+  static void removeAll() async {
+    await prefs!.clear();
   }
 }
