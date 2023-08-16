@@ -23,6 +23,7 @@ class HomeController extends GetxController {
   String? selectedCategory;
   final ImagePicker picker = ImagePicker();
   var addProductFormKey = GlobalKey<FormState>();
+  var addCategoryFormKey = GlobalKey<FormState>();
 
   XFile? productImage;
   Uint8List? imageBytes;
@@ -31,6 +32,8 @@ class HomeController extends GetxController {
   var titleController = TextEditingController();
   var descriptionController = TextEditingController();
   var priceController = TextEditingController();
+
+  var categoryNameController = TextEditingController();
 
   @override
   void onInit() async {
@@ -123,6 +126,45 @@ class HomeController extends GetxController {
           if (result['success']) {
             Get.back();
             getProducts();
+            Get.showSnackbar(GetSnackBar(
+              backgroundColor: Colors.green,
+              message: result['message'],
+              duration: const Duration(seconds: 3),
+            ));
+          } else {
+            Get.showSnackbar(GetSnackBar(
+              backgroundColor: Colors.red,
+              message: result['message'],
+              duration: const Duration(seconds: 3),
+            ));
+          }
+        } catch (e) {
+          Get.showSnackbar(const GetSnackBar(
+            backgroundColor: Colors.red,
+            message: 'Something went wrong',
+            duration: Duration(seconds: 3),
+          ));
+        }
+      }
+    } catch (e) {}
+  }
+
+  void addCategory() async {
+    try {
+      if (addCategoryFormKey.currentState!.validate()) {
+        try {
+          var url = Uri.http(ipAddress, 'ecom2_api/addCategory');
+
+          var response = await http.post(url, body: {
+            'title': categoryNameController.text,
+            'token': MemoryManagement.getAccessToken()
+          });
+
+          var result = jsonDecode(response.body);
+
+          if (result['success']) {
+            Get.back();
+            getCategories();
             Get.showSnackbar(GetSnackBar(
               backgroundColor: Colors.green,
               message: result['message'],
