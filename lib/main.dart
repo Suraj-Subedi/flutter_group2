@@ -3,6 +3,7 @@ import 'package:ecom_2/app/utils/memoryManagement.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -18,15 +19,26 @@ void main() async {
   var role = MemoryManagement.getAccessRole();
 
   runApp(
-    GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Application",
-      initialRoute: token != null
-          ? (role != null && role == 'admin')
-              ? Routes.ADMIN_MAIN
-              : Routes.MAIN
-          : AppPages.LOGIN,
-      getPages: AppPages.routes,
+    KhaltiScope(
+      publicKey: "test_public_key_dde0878862604f24b2475a9806c833d2",
+      builder: (context, navigatorKey) => GetMaterialApp(
+        navigatorKey: navigatorKey,
+        supportedLocales: const [
+          Locale('en', 'US'),
+          Locale('ne', 'NP'),
+        ],
+        localizationsDelegates: const [
+          KhaltiLocalizations.delegate,
+        ],
+        debugShowCheckedModeBanner: false,
+        title: "Application",
+        initialRoute: token != null
+            ? (role != null && role == 'admin')
+                ? Routes.ADMIN_MAIN
+                : Routes.MAIN
+            : AppPages.LOGIN,
+        getPages: AppPages.routes,
+      ),
     ),
   );
 }

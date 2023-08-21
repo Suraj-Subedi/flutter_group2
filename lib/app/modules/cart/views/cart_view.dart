@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/cart_controller.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 
 class CartView extends GetView<CartController> {
   const CartView({Key? key}) : super(key: key);
@@ -52,6 +53,15 @@ class CartView extends GetView<CartController> {
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
+                      ),
+                      KhaltiButton(
+                        config: PaymentConfig(
+                          amount: 1000,
+                          productIdentity: "test product",
+                          productName: "my test product",
+                        ),
+                        onSuccess: (data) {},
+                        onFailure: (v) {},
                       )
                     ],
                   ),
