@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:ecom_2/app/constants.dart';
 import 'package:ecom_2/app/model/product.dart';
 import 'package:ecom_2/app/utils/memoryManagement.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class CartController extends GetxController {
   List<CartItem> cart = [];
@@ -14,6 +16,42 @@ class CartController extends GetxController {
   void onInit() {
     super.onInit();
     mapCart();
+  }
+
+  Future<int?> makeOrder() async {
+    try {
+      var url = Uri.http(ipAddress, 'ecom2_api/createOrder');
+
+      var response = await http.post(url, body: {
+        'token': MemoryManagement.getAccessToken(),
+        'total': total.value.toString(),
+        'cart': MemoryManagement.getMyCart(),
+      });
+
+      var result = jsonDecode(response.body);
+
+      if (result['success']) {
+        Get.showSnackbar(GetSnackBar(
+          backgroundColor: Colors.green,
+          message: result['message'],
+          duration: const Duration(seconds: 3),
+        ));
+        return result['order_id'];
+      } else {
+        Get.showSnackbar(GetSnackBar(
+          backgroundColor: Colors.red,
+          message: result['message'],
+          duration: const Duration(seconds: 3),
+        ));
+      }
+    } catch (e) {
+      Get.showSnackbar(const GetSnackBar(
+        backgroundColor: Colors.red,
+        message: 'Something went wrong',
+        duration: Duration(seconds: 3),
+      ));
+    }
+    return null;
   }
 
   void updateTotal() {

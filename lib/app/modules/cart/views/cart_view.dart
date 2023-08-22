@@ -54,15 +54,68 @@ class CartView extends GetView<CartController> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      KhaltiButton(
-                        config: PaymentConfig(
-                          amount: 1000,
-                          productIdentity: "test product",
-                          productName: "my test product",
-                        ),
-                        onSuccess: (data) {},
-                        onFailure: (v) {},
-                      )
+                      TextButton(
+                        onPressed: () async {
+                          var orderId = await controller.makeOrder();
+                          if (orderId == null) {
+                            return;
+                          } else {}
+                          KhaltiScope.of(Get.context!).pay(
+                            preferences: [
+                              PaymentPreference.khalti,
+                              PaymentPreference.connectIPS
+                            ],
+                            config: PaymentConfig(
+                              amount: 1000,
+                              productIdentity: orderId.toString(),
+                              productName: "My Product",
+                            ),
+                            onSuccess: (v) {
+                              Get.showSnackbar(const GetSnackBar(
+                                backgroundColor: Colors.green,
+                                message: 'Payment successful!',
+                                duration: Duration(seconds: 3),
+                              ));
+                            },
+                            onFailure: (v) {
+                              Get.showSnackbar(const GetSnackBar(
+                                backgroundColor: Colors.red,
+                                message: 'Payment failed!',
+                                duration: Duration(seconds: 3),
+                              ));
+                            },
+                            onCancel: () {
+                              Get.showSnackbar(const GetSnackBar(
+                                backgroundColor: Colors.red,
+                                message: 'Payment cancelled!',
+                                duration: Duration(seconds: 3),
+                              ));
+                            },
+                          );
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                  ),
+                                ]),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.network(
+                                    'https://web.khalti.com/static/img/logo1.png',
+                                    height: 40),
+                                Text('Pay with Khalti'),
+                              ],
+                            )),
+                      ),
                     ],
                   ),
                 )
