@@ -42,6 +42,16 @@ if ($result) {
 
     $cartList = json_decode($cart);
 
+    // for ($x = 0; $x <= $cartList->count($cartList); $x++) {
+    //     $product = $cart->product;
+    //     $quantity = $cartItem->quantity;
+    //     $price = $product->price;
+    //     $line_total = $quantity * $price;
+
+    //     $sql = "INSERT INTO order_details (order_id, product_id, quantity, line_total) VALUES ('$orderId','$product->product_id','$quantity','$line_total')";
+    //     $result = mysqli_query($CON, $sql);
+    // }
+
 
     foreach ($cartList as $cartItem) {
         $product = $cartItem->product;
@@ -57,7 +67,7 @@ if ($result) {
         array(
             "success" => true,
             "message" => "Order created successfully!",
-            "data" => $orderId
+            "order_id" => $orderId
         )
     );
 }
