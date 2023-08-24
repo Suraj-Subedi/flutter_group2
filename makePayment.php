@@ -24,6 +24,7 @@ if (!isset($_POST['order_id']) || !isset($_POST['total']) || !isset($_POST['othe
 }
 
 global $CON;
+$token = $_POST['token'];
 
 $order_id = $_POST['order_id'];
 $total = $_POST['total'];
@@ -31,7 +32,7 @@ $other_data = $_POST['other_data'];
 $userId = getUserId($token);
 
 
-$sql = "INSERT INTO payments (order_id, user_id, total, other_data) VALUES ('$order_id','$userId','$total','$other_data')";
+$sql = "INSERT INTO payments (order_id, user_id, amount, other_data) VALUES ('$order_id','$userId','$total','$other_data')";
 
 $result = mysqli_query($CON, $sql);
 
