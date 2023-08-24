@@ -8,6 +8,7 @@ class OrderView extends GetView<OrderController> {
   const OrderView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(OrderController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('OrderView'),

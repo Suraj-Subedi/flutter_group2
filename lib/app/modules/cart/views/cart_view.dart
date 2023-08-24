@@ -59,7 +59,7 @@ class CartView extends GetView<CartController> {
                           var orderId = await controller.makeOrder();
                           if (orderId == null) {
                             return;
-                          } else {}
+                          }
                           KhaltiScope.of(Get.context!).pay(
                             preferences: [
                               PaymentPreference.khalti,
@@ -70,12 +70,11 @@ class CartView extends GetView<CartController> {
                               productIdentity: orderId.toString(),
                               productName: "My Product",
                             ),
-                            onSuccess: (v) {
-                              Get.showSnackbar(const GetSnackBar(
-                                backgroundColor: Colors.green,
-                                message: 'Payment successful!',
-                                duration: Duration(seconds: 3),
-                              ));
+                            onSuccess: (PaymentSuccessModel v) {
+                              controller.makePayment(
+                                  total: (v.amount / 100).toString(),
+                                  orderId: orderId.toString(),
+                                  otherData: v.toString());
                             },
                             onFailure: (v) {
                               Get.showSnackbar(const GetSnackBar(

@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 
 class CartController extends GetxController {
   List<CartItem> cart = [];
+
   var total = 0.0.obs;
 
   final count = 0.obs;
@@ -37,6 +38,50 @@ class CartController extends GetxController {
           duration: const Duration(seconds: 3),
         ));
         return result['order_id'];
+      } else {
+        Get.showSnackbar(GetSnackBar(
+          backgroundColor: Colors.red,
+          message: result['message'],
+          duration: const Duration(seconds: 3),
+        ));
+      }
+    } catch (e) {
+      Get.showSnackbar(const GetSnackBar(
+        backgroundColor: Colors.red,
+        message: 'Something went wrong',
+        duration: Duration(seconds: 3),
+      ));
+    }
+    return null;
+  }
+
+  void makePayment(
+      {required String total,
+      required String orderId,
+      required String otherData}) async {
+    try {
+      var url = Uri.http(ipAddress, 'ecom2_api/makePayment');
+
+      var response = await http.post(url, body: {
+        'token': MemoryManagement.getAccessToken(),
+        'total': total,
+        'order_id': orderId,
+        'other_data': otherData,
+      });
+
+      print(response.body);
+
+      var result = jsonDecode(response.body);
+
+      if (result['success']) {
+        cart.clear();
+        MemoryManagement.setMyCart('[]');
+        updateTotal();
+        Get.showSnackbar(GetSnackBar(
+          backgroundColor: Colors.green,
+          message: result['message'],
+          duration: const Duration(seconds: 3),
+        ));
       } else {
         Get.showSnackbar(GetSnackBar(
           backgroundColor: Colors.red,
