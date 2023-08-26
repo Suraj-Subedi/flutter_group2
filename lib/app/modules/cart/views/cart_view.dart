@@ -56,6 +56,14 @@ class CartView extends GetView<CartController> {
                       ),
                       TextButton(
                         onPressed: () async {
+                          if (controller.cart.isEmpty) {
+                            Get.showSnackbar(const GetSnackBar(
+                              backgroundColor: Colors.red,
+                              message: 'Cart is empty!',
+                              duration: Duration(seconds: 3),
+                            ));
+                            return;
+                          }
                           var orderId = await controller.makeOrder();
                           if (orderId == null) {
                             return;

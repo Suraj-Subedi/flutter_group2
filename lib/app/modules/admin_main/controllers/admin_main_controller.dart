@@ -2,6 +2,7 @@ import 'package:ecom_2/app/modules/admin_categories/views/admin_categories_view.
 import 'package:ecom_2/app/modules/admin_dashboard/views/admin_dashboard_view.dart';
 import 'package:ecom_2/app/modules/admin_orders/views/admin_orders_view.dart';
 import 'package:ecom_2/app/modules/admin_products/views/admin_products_view.dart';
+import 'package:ecom_2/app/modules/order/views/order_view.dart';
 import 'package:ecom_2/app/modules/profile/views/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ class AdminMainController extends GetxController {
   //TODO: Implement AdminMainController
   List<Widget> screens = [
     const AdminDashboardView(),
-    const AdminOrdersView(),
+    const OrderView(),
     const AdminCategoriesView(),
     const AdminProductsView(),
     const ProfileView()
