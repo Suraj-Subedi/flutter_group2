@@ -23,9 +23,9 @@ $userId = getUserId($token);
 $sql = '';
 
 if ($isAdmin) {
-    $sql = "SELECT orders.*,email,full_name FROM orders join users on users.user_id = orders.user_id";
+    $sql = "SELECT orders.*,email,full_name FROM orders join users on users.user_id = orders.user_id order by order_id desc";
 } else {
-    $sql = "SELECT * FROM orders WHERE user_id='$userId'";
+    $sql = "SELECT * FROM orders WHERE user_id='$userId' order by order_id desc";
 }
 
 $result = mysqli_query($CON, $sql);
