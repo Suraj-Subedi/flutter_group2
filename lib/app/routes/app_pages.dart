@@ -12,6 +12,8 @@ import '../modules/admin_products/bindings/admin_products_binding.dart';
 import '../modules/admin_products/views/admin_products_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
+import '../modules/detailed_product/bindings/detailed_product_binding.dart';
+import '../modules/detailed_product/views/detailed_product_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -100,6 +102,11 @@ class AppPages {
       name: _Paths.ADMIN_ORDERS,
       page: () => const AdminOrdersView(),
       binding: AdminOrdersBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAILED_PRODUCT,
+      page: () => const DetailedProductView(),
+      binding: DetailedProductBinding(),
     ),
   ];
 }

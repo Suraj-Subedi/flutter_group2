@@ -16,6 +16,7 @@ abstract class Routes {
   static const ADMIN_PRODUCTS = _Paths.ADMIN_PRODUCTS;
   static const ADMIN_CATEGORIES = _Paths.ADMIN_CATEGORIES;
   static const ADMIN_ORDERS = _Paths.ADMIN_ORDERS;
+  static const DETAILED_PRODUCT = _Paths.DETAILED_PRODUCT;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const ADMIN_PRODUCTS = '/admin-products';
   static const ADMIN_CATEGORIES = '/admin-categories';
   static const ADMIN_ORDERS = '/admin-orders';
+  static const DETAILED_PRODUCT = '/detailed-product';
 }
