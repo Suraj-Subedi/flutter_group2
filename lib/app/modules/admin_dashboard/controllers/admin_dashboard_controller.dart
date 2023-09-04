@@ -22,7 +22,7 @@ class AdminDashboardController extends GetxController {
     super.onReady();
   }
 
-  void getStats() async {
+  Future<void> getStats() async {
     try {
       var url = Uri.http(ipAddress, 'ecom2_api/getStats');
       // await Future.delayed(const Duration(seconds: 3));

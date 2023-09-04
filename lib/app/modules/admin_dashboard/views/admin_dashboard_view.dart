@@ -1,3 +1,5 @@
+import 'package:ecom_2/app/components/My_button.dart';
+import 'package:ecom_2/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,48 +15,64 @@ class AdminDashboardView extends GetView<AdminDashboardController> {
           title: const Text('Dashboard'),
           centerTitle: true,
         ),
-        body: GetBuilder<AdminDashboardController>(
-          init: AdminDashboardController(),
-          builder: (controller) {
-            if (controller.stats == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+        body: Column(
+          children: [
+            GetBuilder<AdminDashboardController>(
+              init: AdminDashboardController(),
+              builder: (controller) {
+                if (controller.stats == null) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
 
-            return RefreshIndicator(
-              onRefresh: () async {
-                controller.getStats();
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    // await Future.delayed(Duration(seconds: 5));
+                    await controller.getStats();
+                  },
+                  child: GridView(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.all(10),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 5,
+                          crossAxisSpacing: 5),
+                      children: [
+                        StatsCard(
+                          label: 'Total Income',
+                          icon: Icon(Icons.money),
+                          isAmount: true,
+                          value: controller.stats?.totalIncome.toString() ?? '',
+                        ),
+                        StatsCard(
+                          label: 'Total Users',
+                          icon: Icon(Icons.person),
+                          value: controller.stats?.totalUsers.toString() ?? '',
+                        ),
+                        StatsCard(
+                          label: 'Total Products',
+                          value:
+                              controller.stats?.totalProducts.toString() ?? '',
+                        ),
+                        StatsCard(
+                          label: 'Total Orders',
+                          value: controller.stats?.totalOrders.toString() ?? '',
+                        )
+                      ]),
+                );
               },
-              child: GridView(
-                  padding: EdgeInsets.all(10),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 5,
-                      crossAxisSpacing: 5),
-                  children: [
-                    StatsCard(
-                      label: 'Total Income',
-                      icon: Icon(Icons.money),
-                      isAmount: true,
-                      value: controller.stats?.totalIncome.toString() ?? '',
-                    ),
-                    StatsCard(
-                      label: 'Total Users',
-                      icon: Icon(Icons.person),
-                      value: controller.stats?.totalUsers.toString() ?? '',
-                    ),
-                    StatsCard(
-                      label: 'Total Products',
-                      value: controller.stats?.totalProducts.toString() ?? '',
-                    ),
-                    StatsCard(
-                      label: 'Total Orders',
-                      value: controller.stats?.totalOrders.toString() ?? '',
-                    )
-                  ]),
-            );
-          },
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            MyButton(
+              tittle: 'View Orders',
+              onPressed: () {
+                Get.toNamed(Routes.ORDER);
+              },
+            )
+          ],
         ));
   }
 }
