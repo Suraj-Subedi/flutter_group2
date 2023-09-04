@@ -1,4 +1,6 @@
+import 'package:ecom_2/app/components/admin_product_card.dart';
 import 'package:ecom_2/app/components/product_card.dart';
+import 'package:ecom_2/app/model/product.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,6 +16,16 @@ class HomeView extends GetView<HomeController> {
         appBar: AppBar(
           title: const Text('HomeView'),
           centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  showSearch(
+                    context: context,
+                    delegate: SearchView(),
+                  );
+                },
+                icon: const Icon(Icons.search))
+          ],
         ),
         body: GetBuilder<HomeController>(
           builder: (controller) {
@@ -82,5 +94,43 @@ class HomeView extends GetView<HomeController> {
             );
           },
         ));
+  }
+}
+
+HomeController controller = Get.find();
+
+class SearchView extends SearchDelegate {
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [IconButton(onPressed: () {}, icon: const Icon(Icons.clear))];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return BackButton();
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return buildSuggestions(context);
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<Product> suggestions = [];
+    suggestions = controller.products
+            ?.where((element) =>
+                element.title?.toLowerCase().contains(query.toLowerCase()) ??
+                false)
+            .toList() ??
+        [];
+
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: suggestions.length,
+        itemBuilder: (context, index) => SizedBox(
+              height: 100,
+              child: AdminProductCard(product: suggestions[index]),
+            ));
   }
 }
