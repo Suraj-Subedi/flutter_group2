@@ -12,6 +12,7 @@ class AddProductPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
+      init: HomeController(),
       builder: (controller) => Dialog(
         insetPadding: const EdgeInsets.all(10),
         child: Padding(
