@@ -1,24 +1,4 @@
-<?php
 
-include './Helpers/DatabaseConfig.php';
-include './Helpers/Authenication.php';
-
-if (!isset($_POST['token'])) {
-    echo json_encode(
-        array(
-            "success" => false,
-            "message" => "You are not authorized!"
-        )
-    );
-    die();
-}
-
-global $CON;
-
-$token = $_POST['token'];
-
-$isAdmin = isAdmin($token);
-$userId = getUserId($token);
 
 $sql = '';
 
