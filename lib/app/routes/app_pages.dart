@@ -14,6 +14,8 @@ import '../modules/admin_users/bindings/admin_users_binding.dart';
 import '../modules/admin_users/views/admin_users_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
+import '../modules/detail_category/bindings/detail_category_binding.dart';
+import '../modules/detail_category/views/detail_category_view.dart';
 import '../modules/detailed_product/bindings/detailed_product_binding.dart';
 import '../modules/detailed_product/views/detailed_product_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -30,6 +32,8 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/splash/bindings/splash_binding.dart';
+import '../modules/splash/views/splash_view.dart';
 
 part 'app_routes.dart';
 
@@ -114,6 +118,16 @@ class AppPages {
       name: _Paths.ADMIN_USERS,
       page: () => const AdminUsersView(),
       binding: AdminUsersBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_CATEGORY,
+      page: () => const DetailCategoryView(),
+      binding: DetailCategoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH,
+      page: () => const SplashView(),
+      binding: SplashBinding(),
     ),
   ];
 }

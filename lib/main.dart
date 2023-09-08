@@ -32,12 +32,9 @@ void main() async {
         ],
         debugShowCheckedModeBanner: false,
         title: "Application",
-        initialRoute: token != null
-            ? (role != null && role == 'admin')
-                ? Routes.ADMIN_MAIN
-                : Routes.MAIN
-            : AppPages.LOGIN,
+        initialRoute: Routes.SPLASH,
         getPages: AppPages.routes,
+        defaultTransition: Transition.cupertino,
       ),
     ),
   );

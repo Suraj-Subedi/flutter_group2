@@ -1,6 +1,7 @@
 import 'package:ecom_2/app/components/admin_product_card.dart';
 import 'package:ecom_2/app/components/product_card.dart';
 import 'package:ecom_2/app/model/product.dart';
+import 'package:ecom_2/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -20,9 +21,7 @@ class HomeView extends GetView<HomeController> {
             IconButton(
                 onPressed: () {
                   showSearch(
-                    context: context,
-                    delegate: SearchView(),
-                  );
+                      context: context, delegate: SearchView(), query: 'red');
                 },
                 icon: const Icon(Icons.search))
           ],
@@ -41,26 +40,44 @@ class HomeView extends GetView<HomeController> {
                 padding: const EdgeInsets.all(25.0),
                 child: Column(
                   children: [
+                    // TextField(
+                    //   decoration: InputDecoration(border: OutlineInputBorder()),
+                    //   // onChanged: (v) {
+                    //   //   showSearch(
+                    //   //       context: context, delegate: SearchView(), query: v);
+                    //   // },
+                    //   onSubmitted: (v) {
+                    //     showSearch(
+                    //         context: context, delegate: SearchView(), query: v);
+                    //   },
+                    // ),
                     SizedBox(
                       height: 40,
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.categories?.length ?? 0,
                           itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(200)),
-                              child: Center(
-                                child: Text(
-                                  controller.categories?[index].categoryTitle ??
-                                      '',
-                                  style: const TextStyle(color: Colors.white),
+                            return GestureDetector(
+                              onTap: () {
+                                Get.toNamed(Routes.DETAIL_CATEGORY,
+                                    arguments: controller.categories?[index]);
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 10),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(200)),
+                                child: Center(
+                                  child: Text(
+                                    controller
+                                            .categories?[index].categoryTitle ??
+                                        '',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             );

@@ -1,6 +1,7 @@
 import 'package:ecom_2/app/constants.dart';
 import 'package:ecom_2/app/model/product.dart';
 import 'package:ecom_2/app/modules/admin_products/controllers/admin_products_controller.dart';
+import 'package:ecom_2/app/utils/memoryManagement.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,18 +45,21 @@ class AdminProductCard extends StatelessWidget {
             ),
           ),
           Spacer(),
-          IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => DeleteProductDialog(
-                          productId: product.productId ?? '',
-                        ));
-              },
-              icon: Icon(
-                Icons.delete,
-                color: Colors.red,
-              ))
+          MemoryManagement.getAccessRole() == 'admin'
+              ? IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => DeleteProductDialog(
+                              productId: product.productId ?? '',
+                            ));
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                )
+              : SizedBox()
         ],
       ),
     );
@@ -69,6 +73,7 @@ class DeleteProductDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<AdminProductsController>();
+    // var controller = Get.put(AdminProductsController());
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
