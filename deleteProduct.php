@@ -33,7 +33,21 @@ if (
 
     $product_id = $_POST['product_id'];
 
-    $sql = "update products set is_available = 0 where product_id = $product_id";
+    $sql = "select * from products where productid = $product_Id";
+
+    $result = mysqli_query($CON, $sql);
+
+    $product = mysqli_fetch_assoc($result);
+    $is_available = $product['is_available'];
+    $value = '';
+
+    if ($is_available == 0) {
+        $value = 1;
+    } else {
+        $value = 0;
+    }
+
+    $sql = "update products set is_available = $value where product_id = $product_id";
 
     $result = mysqli_query($CON, $sql);
 
