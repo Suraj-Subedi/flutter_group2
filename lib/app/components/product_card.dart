@@ -32,12 +32,15 @@ class ProductCard extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Image.network(
-                    getImageUrl(
-                      product.imageUrl,
+                  child: Hero(
+                    tag: 'product+${product.productId}',
+                    child: Image.network(
+                      getImageUrl(
+                        product.imageUrl,
+                      ),
+                      width: double.infinity,
+                      fit: BoxFit.cover,
                     ),
-                    width: double.infinity,
-                    fit: BoxFit.cover,
                   ),
                 ),
                 Expanded(

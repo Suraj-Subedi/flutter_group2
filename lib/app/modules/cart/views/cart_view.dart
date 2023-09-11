@@ -153,7 +153,7 @@ class CartCard extends StatelessWidget {
             ),
           ]),
           margin: const EdgeInsets.only(bottom: 20),
-          height: 100,
+          height: 110,
           child: Row(
             children: [
               Expanded(
@@ -181,9 +181,26 @@ class CartCard extends StatelessWidget {
                         'Price: ${cartItem.product.price}',
                         style: const TextStyle(fontSize: 16),
                       ),
-                      Text(
-                        'Quantity: ${cartItem.quantity}',
-                        style: const TextStyle(fontSize: 16),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              controller.decreaseQuantity(index);
+                            },
+                            icon: Container(
+                                child: Center(child: Icon(Icons.remove))),
+                          ),
+                          Text(
+                            '${cartItem.quantity}',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              controller.increaseQuantity(index);
+                            },
+                            icon: Container(child: Icon(Icons.add)),
+                          ),
+                        ],
                       ),
                     ],
                   ),

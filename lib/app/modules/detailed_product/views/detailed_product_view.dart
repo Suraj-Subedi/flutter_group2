@@ -25,11 +25,14 @@ class DetailedProductView extends GetView<DetailedProductController> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.network(
-                  width: double.infinity,
-                  height: Get.height * 0.4,
-                  getImageUrl(product.imageUrl ?? ''),
-                  fit: BoxFit.cover,
+                Hero(
+                  tag: 'product+${product.productId}',
+                  child: Image.network(
+                    width: double.infinity,
+                    height: Get.height * 0.4,
+                    getImageUrl(product.imageUrl ?? ''),
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),

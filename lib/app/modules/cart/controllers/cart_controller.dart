@@ -19,6 +19,28 @@ class CartController extends GetxController {
     mapCart();
   }
 
+  void increaseQuantity(int index) {
+    cart[index].quantity++;
+    updateLocal();
+    updateTotal();
+    update();
+  }
+
+  void decreaseQuantity(int index) {
+    if (cart[index].quantity <= 1) {
+      Get.showSnackbar(const GetSnackBar(
+        backgroundColor: Colors.red,
+        message: 'Quantity can\'t be less than 1',
+        duration: Duration(seconds: 3),
+      ));
+      return;
+    }
+    cart[index].quantity--;
+    updateLocal();
+    updateTotal();
+    update();
+  }
+
   Future<int?> makeOrder() async {
     try {
       var url = Uri.http(ipAddress, 'ecom2_api/createOrder');
@@ -169,7 +191,7 @@ class CartController extends GetxController {
 
 class CartItem {
   final Product product;
-  final int quantity;
+  int quantity;
 
   CartItem({required this.product, this.quantity = 1});
 }
